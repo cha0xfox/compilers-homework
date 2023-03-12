@@ -40,7 +40,7 @@ Usage: ./lab1.out (optional):<filename>
 ```
 compilers-homework
  ┣ src
- ┃ ┗ lab1.ll
+ ┃ ┗ lab1.l
  ┣ tests
  ┃ ┗ tests.txt
  ┣ .gitignore
