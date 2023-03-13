@@ -1,22 +1,22 @@
 CC = gcc
 CFLAGS = -lfl
-current_dir = $(shell pwd)
 TARGET = lab1.out
 
-compile lab: dir lab1.out testAll
+compile lab: lab1.out testAll
 
 lab1.out:
-	flex $(current_dir)/src/lab1.l
-	mv lex.yy.c $(current_dir)/src/tmp
-	$(CC) -o $(current_dir)/bin/$@ $(current_dir)/src/tmp/lex.yy.c $(CFLAGS)
-
-dir:
-	mkdir $(current_dir)/bin
-	mkdir $(current_dir)/src/tmp
+	@ echo "building..."
+	@ mkdir -p bin
+	@ mkdir -p tmp
+	@ flex src/lab1.l
+	@ mv lex.yy.c tmp
+	@ $(CC) -o bin/$@ tmp/lex.yy.c $(CFLAGS)
+	@ echo "binary moved to bin"
 
 clean: 
-	rm -rf $(current_dir)/bin
-	rm -rf $(current_dir)/src/tmp
+	@ rm -rf bin
+	@ rm -rf tmp
+	@echo "----dir cleaned----"
 
 .PHONY: rebuild
 rebuild:
@@ -30,12 +30,15 @@ testAll: test1 test2 test3
 
 test1:
 	@echo "TEST: wrong arguments"
-	if ./bin/$(TARGET) $(current_dir)/tests/tests.txt $(current_dir)/tests/tests2.txt; then false; fi
+	@ if ./bin/$(TARGET) tests/tests.txt tests/tests2.txt; then false; fi
+	@echo "OK"
 
 test2:
 	@echo "TEST: pipe working"
-	echo "0xF | 0x2" | ./bin/$(TARGET) $2>/dev/null
+	@ echo "0xF | 0x2" | ./bin/$(TARGET) $2>/dev/null
+	@echo "OK"
 
 test3:
 	@echo "TEST: file working"
-	./bin/$(TARGET) $(current_dir)/tests/tests2.txt $2>/dev/null
+	@ ./bin/$(TARGET) tests/tests2.txt $2>/dev/null
+	@echo "OK"
