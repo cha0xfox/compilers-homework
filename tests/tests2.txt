@@ -9,3 +9,4 @@ bswap(b)
 is_true(f)
 Uo1yIxaI0A
 0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+0xFFFFFFFFFFFFFFFFFFFFFFFFFFF

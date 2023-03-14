@@ -2,6 +2,7 @@
 
 %{
 #include <stdio.h>
+#include <math.h>
 %}
 
 %%
@@ -17,7 +18,13 @@
 "(" {printf("LPARENT: \"(\"\n");}
 ")" {printf("RPARENT: \")\"\n");}
 
-0[xX][0-9a-fA-F]+ {printf("ILIT: \"%s\"\n", yytext);} //match hex numbers
+0[xX][0-9a-fA-F]+ {
+        long int num = strtol(yytext, NULL, 16);
+        if (num > pow(2,32) - 1) 
+            printf("ERROR: %s\n", yytext);
+        else 
+            printf("ILIT: \"%s\"\n", yytext);
+    } //match hex numbers, give error if above 2^32
 
 [0-9][a-zA-Z0-9_]*  {printf("ERROR: %s\n", yytext);} //match anything else that starts with a number, but a word
 
@@ -30,14 +37,11 @@ int main(int argc, char **argv)
     {
     // If no filename print Usage and take from stdin
     if (argc == 1) {
-        fprintf(stderr, "Usage: %s <filename>\n", argv[0]);
-        printf("Escape char: ^D, write input below\n");
         yylex();
         return 0;
     }
     // Too many arguments, close program
     if (argc > 2) {
-        fprintf(stderr, "Too many arguments, closing.\n");
         return 1;
     }
 

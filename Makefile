@@ -2,7 +2,7 @@ CC = gcc
 CFLAGS = -lfl
 TARGET = lab1.out
 
-compile lab: lab1.out testAll
+compile lab: lab1.out
 
 lab1.out:
 	@ echo "building..."
@@ -23,13 +23,11 @@ rebuild:
 	$(MAKE) clean
 	$(MAKE)
 
-testAll: test1 test2 test3
-	@echo "--------------------"
+test: test1 test2 test3
 	@echo "----TESTS PASSED----"
-	@echo "--------------------"
 
 test1:
-	@echo "TEST: wrong arguments"
+	@echo "TEST: multiple arguments"
 	@ if ./bin/$(TARGET) tests/tests.txt tests/tests2.txt; then false; fi
 	@echo "OK"
 
