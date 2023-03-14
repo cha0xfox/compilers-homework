@@ -20,7 +20,7 @@
 
 0[xX][0-9a-fA-F]+ {
         long int num = strtol(yytext, NULL, 16);
-        if (num > pow(2,32) - 1) 
+        if (num > pow(2,32)) 
             printf("ERROR: %s\n", yytext);
         else 
             printf("ILIT: \"%s\"\n", yytext);
