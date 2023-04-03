@@ -37,7 +37,9 @@ statement
 
 expression
     : ILIT
-    | IDENTIFIER
+    | IDENTIFIER ASSIGN expression
+    | IDENTIFIER LPARENT RPARENT
+    | IDENTIFIER LPARENT expression RPARENT
     | LPARENT expression RPARENT
     | expression ASSIGN expression
     | expression BOR expression
