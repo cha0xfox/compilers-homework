@@ -32,36 +32,14 @@ program
 
 statement
     : EOL {lineno++;}
-    | word EOL {lineno++;}
+    | expression EOL {lineno++;}
     ;
-
-word
-    : function
-    | expression
-    ;
-
-function
-    : IDENTIFIER ASSIGN expression
-    | IDENTIFIER LPARENT function RPARENT
-    | IDENTIFIER LPARENT args RPARENT
-    | IDENTIFIER LPARENT RPARENT
-    ;
-
-args
-    : ILIT
-    | LPARENT args RPARENT
-    | args ASSIGN args
-    | args BOR args
-    | args BXOR args
-    | args BAND args
-    | BNOT args
-    | args COMMA args
-    | args LPARENT args RPARENT
-    ;
-
 
 expression
     : ILIT
+    | IDENTIFIER ASSIGN expression
+    | IDENTIFIER LPARENT expression RPARENT
+    | IDENTIFIER LPARENT RPARENT
     | LPARENT expression RPARENT
     | expression ASSIGN expression
     | expression BOR expression
