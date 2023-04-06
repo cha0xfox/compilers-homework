@@ -32,23 +32,26 @@ program
 
 statement
     : EOL {lineno++;}
-    | expression EOL {lineno++;}
+    | word EOL {lineno++;}
+    ;
+
+word
+    : expression
+    | IDENTIFIER ASSIGN expression
     ;
 
 expression
     : ILIT
-    | IDENTIFIER ASSIGN expression
+    | IDENTIFIER
     | IDENTIFIER LPARENT expression RPARENT
     | IDENTIFIER LPARENT RPARENT
     | LPARENT expression RPARENT
-    | expression ASSIGN expression
     | expression BOR expression
     | expression BXOR expression
     | expression BAND expression
     | BNOT expression
     | expression COMMA expression
     | expression LPARENT expression RPARENT
-    | IDENTIFIER
     ;
 
 %%

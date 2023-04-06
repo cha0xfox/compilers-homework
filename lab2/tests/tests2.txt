@@ -7,6 +7,13 @@ _0aaa( 0xf , 0xa )
 b = ( _0aaa( 0x1, 0xf) & 0x1 )
 b()
 a = f()
-f(a)
 a
 a = f(a)
+a = (0x0 | 0x1) ^ bswap(f)
+a = f() | c(a,c) ^ (0x0 & 0x2)
+a = f() | a(a,a)
+a = f() | c(a,c) ^ (0x0 & ff(0x1|0x2))
+f | f 
+f() | f
+f | f()
+a(b(c()))
